@@ -13,11 +13,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="de">
       <head>
@@ -26,14 +22,11 @@ export default function RootLayout({
           name="description"
           content="Galerie von kolumbianischen Landschaftsgemälden. Entdecken Sie die Schönheit Kolumbiens durch unsere einzigartigen Kunstwerke."
         />
-        <meta
-          name="keywords"
-          content="Kolumbianische Kunst, Landschaftsgemälde, Gemälde kaufen"
-        />
+        <meta name="keywords" content="Kolumbianische Kunst, Landschaftsgemälde, Gemälde kaufen" />
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        {children}
+        <CartProvider>{children}</CartProvider>
       </body>
     </html>
   );
