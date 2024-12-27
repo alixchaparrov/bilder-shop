@@ -5,7 +5,6 @@ import client from "@/lib/sanity";
 import ProductCard from "@/app/components/ProductCard";
 import Image from "next/image";
 import { useCartStore } from "@/store/cartStore";
-import { FaMinus, FaPlus, FaTrash, FaShoppingCart, FaMoon, FaSun } from "react-icons/fa";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -72,16 +71,18 @@ export default function Home() {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
             <button
-              className="px-4 py-2 rounded-lg"
+              className={`px-4 py-2 rounded-lg ${
+                darkMode ? "bg-yellow-500" : "bg-blue-500"
+              }`}
               onClick={() => setDarkMode(!darkMode)}
             >
-              {darkMode ? <FaSun size={20} /> : <FaMoon size={20} />}
+              {darkMode ? "🌞 Hell" : "🌙 Dunkel"}
             </button>
             <button
-              className="cart-button flex items-center space-x-2 text-white"
+              className="cart-button"
               onClick={() => setShowCart(!showCart)}
             >
-              <FaShoppingCart size={20} />
+              🛒
               {cart.length > 0 && (
                 <span className="cart-counter">
                   {cart.reduce((total, item) => total + item.quantity, 0)}
@@ -153,34 +154,20 @@ export default function Home() {
                       className="flex justify-between items-center"
                     >
                       <span>
-                        {item.name} (x{item.quantity}) - {item.price * item.quantity} €
+                        {item.name} (x{item.quantity}) - {item.price} € / Stk.
                       </span>
                       <div className="flex items-center space-x-2">
-                        {/* Botón para disminuir cantidad */}
                         <button
                           onClick={() => removeOneFromCart(item._id)}
-                          className="text-yellow-500 hover:text-yellow-700"
-                          title="Reduzca la cantidad"
+                          className="text-yellow-500 hover:underline"
                         >
-                          <FaMinus />
+                          -
                         </button>
-
-                        {/* Botón para agregar más */}
-                        <button
-                          onClick={() => addToCart(item)}
-                          className="text-green-500 hover:text-green-700"
-                          title="Agregar uno más"
-                        >
-                          <FaPlus />
-                        </button>
-
-                        {/* Botón para eliminar completamente */}
                         <button
                           onClick={() => removeFromCart(item._id)}
-                          className="text-red-500 hover:text-red-700"
-                          title="Eliminar producto"
+                          className="text-red-500 hover:underline"
                         >
-                          <FaTrash />
+                          Löschen
                         </button>
                       </div>
                     </li>
@@ -194,7 +181,12 @@ export default function Home() {
                     Warenkorb leeren
                   </button>
                   <span className="font-bold text-lg">
-                    Gesamtpreis: {getTotalPrice()} €
+                    Gesamtpreis:{" "}
+                    {cart.reduce(
+                      (total, item) => total + item.price * item.quantity,
+                      0
+                    )}{" "}
+                    €
                   </span>
                 </div>
               </>

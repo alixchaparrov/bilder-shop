@@ -5,7 +5,7 @@ import client from "@/lib/sanity";
 import ProductCard from "@/app/components/ProductCard";
 import Image from "next/image";
 import { useCartStore } from "@/store/cartStore";
-import { FaMinus, FaPlus, FaTrash, FaShoppingCart, FaMoon, FaSun } from "react-icons/fa";
+import { FaMinus, FaPlus, FaTrash, FaShoppingCart } from "react-icons/fa";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -72,10 +72,12 @@ export default function Home() {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
             <button
-              className="px-4 py-2 rounded-lg"
+              className={`px-4 py-2 rounded-lg ${
+                darkMode ? "bg-yellow-500" : "bg-blue-500"
+              }`}
               onClick={() => setDarkMode(!darkMode)}
             >
-              {darkMode ? <FaSun size={20} /> : <FaMoon size={20} />}
+              {darkMode ? "🌞 Hell" : "🌙 Dunkel"}
             </button>
             <button
               className="cart-button flex items-center space-x-2 text-white"

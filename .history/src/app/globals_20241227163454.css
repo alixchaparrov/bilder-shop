@@ -135,10 +135,6 @@ main {
   @apply relative flex items-center justify-center p-2 rounded-full bg-yellow-500 hover:bg-yellow-600 transition-colors duration-300 shadow-md;
 }
 
-.cart-counter {
-  @apply absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold shadow-lg;
-}
-
 /* Estilo para inputs */
 input[type="text"] {
   @apply px-4 py-2 rounded border focus:outline-none focus:ring-2 focus:ring-secondary;

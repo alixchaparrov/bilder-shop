@@ -20,28 +20,25 @@ export const useCartStore = create((set) => ({
     set((state) => ({
       cart: state.cart.filter((item) => item._id !== productId),
     })),
-    removeOneFromCart: (productId) =>
-      set((state) => {
-        console.log("Antes de eliminar uno:", state.cart);
-        const updatedCart = state.cart
-          .map((item) =>
-            item._id === productId && item.quantity > 1
-              ? { ...item, quantity: item.quantity - 1 }
-              : item
-          )
-          .filter((item) => item.quantity > 0);
-        console.log("Después de eliminar uno:", updatedCart);
-        return { cart: updatedCart };
-      }),
-    
-     
+  removeOneFromCart: (productId) =>
+    set((state) => {
+      const updatedCart = state.cart
+        .map((item) =>
+          item._id === productId && item.quantity > 1
+            ? { ...item, quantity: item.quantity - 1 }
+            : item
+        )
+        .filter((item) => item.quantity > 0); // Asegúrate de eliminar productos con cantidad 0
+      return { cart: updatedCart };
+    }),
 
   clearCart: () => set({ cart: [] }), // Función para vaciar el carrito
-  getTotalPrice: () => {
-    const totalPrice = (get().cart || []).reduce(
-      (total, item) => total + item.price * item.quantity,
-      0
-    );
-    return totalPrice;
-  },
+  getTotalPrice: () =>
+    set((state) => {
+      const totalPrice = state.cart.reduce(
+        (total, item) => total + item.price * item.quantity,
+        0
+      );
+      return { totalPrice };
+    }),
 }));

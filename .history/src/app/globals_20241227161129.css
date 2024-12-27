@@ -95,15 +95,6 @@ main {
   @apply bg-white text-black dark:bg-gray-800 dark:text-gray-200 p-6 rounded-lg shadow-lg max-w-lg w-full;
 }
 
-.modal-content .text-lg {
-  font-size: 1.125rem;
-}
-
-.modal-content .text-xl {
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: var(--primary); /* Usa tu color principal */
-}
 
 
 .modal-header {
@@ -129,14 +120,6 @@ main {
 
 .card-price {
   @apply text-lg font-semibold text-accent mt-2;
-}
-
-.cart-button {
-  @apply relative flex items-center justify-center p-2 rounded-full bg-yellow-500 hover:bg-yellow-600 transition-colors duration-300 shadow-md;
-}
-
-.cart-counter {
-  @apply absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold shadow-lg;
 }
 
 /* Estilo para inputs */

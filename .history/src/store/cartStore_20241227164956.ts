@@ -37,11 +37,12 @@ export const useCartStore = create((set) => ({
      
 
   clearCart: () => set({ cart: [] }), // Función para vaciar el carrito
-  getTotalPrice: () => {
-    const totalPrice = (get().cart || []).reduce(
-      (total, item) => total + item.price * item.quantity,
-      0
-    );
-    return totalPrice;
-  },
+  getTotalPrice: () =>
+    set((state) => {
+      const totalPrice = state.cart.reduce(
+        (total, item) => total + item.price * item.quantity,
+        0
+      );
+      return { totalPrice };
+    }),
 }));

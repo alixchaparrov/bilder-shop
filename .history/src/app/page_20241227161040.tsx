@@ -5,12 +5,10 @@ import client from "@/lib/sanity";
 import ProductCard from "@/app/components/ProductCard";
 import Image from "next/image";
 import { useCartStore } from "@/store/cartStore";
-import { FaMinus, FaPlus, FaTrash, FaShoppingCart, FaMoon, FaSun } from "react-icons/fa";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
-  const { cart, addToCart, removeFromCart, clearCart, removeOneFromCart } =
-    useCartStore();
+  const { cart, removeFromCart } = useCartStore();
   const [searchQuery, setSearchQuery] = useState("");
   const [darkMode, setDarkMode] = useState(false);
   const [showCart, setShowCart] = useState(false);
@@ -40,10 +38,6 @@ export default function Home() {
     currentPage * itemsPerPage
   );
 
-  const getTotalPrice = () => {
-    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
-  };
-
   return (
     <div
       className={`min-h-screen flex flex-col ${
@@ -72,20 +66,20 @@ export default function Home() {
               onChange={(e) => setSearchQuery(e.target.value)}
             />
             <button
-              className="px-4 py-2 rounded-lg"
+              className={`px-4 py-2 rounded-lg ${
+                darkMode ? "bg-yellow-500" : "bg-blue-500"
+              }`}
               onClick={() => setDarkMode(!darkMode)}
             >
-              {darkMode ? <FaSun size={20} /> : <FaMoon size={20} />}
+              {darkMode ? "🌞 Hell" : "🌙 Dunkel"}
             </button>
             <button
-              className="cart-button flex items-center space-x-2 text-white"
-              onClick={() => setShowCart(!showCart)}
+              className="cart-button"
+              onClick={() => setShowCart(true)}
             >
-              <FaShoppingCart size={20} />
+              🛒
               {cart.length > 0 && (
-                <span className="cart-counter">
-                  {cart.reduce((total, item) => total + item.quantity, 0)}
-                </span>
+                <span className="cart-counter">{cart.length}</span>
               )}
             </button>
           </div>
@@ -97,7 +91,7 @@ export default function Home() {
         <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-center mb-6">
           Unsere Gemälde
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 grid-container">
           {paginatedProducts.map((product) => (
             <ProductCard key={product._id} product={product} />
           ))}
@@ -141,79 +135,46 @@ export default function Home() {
 
       {/* Modal del carrito */}
       {showCart && (
-        <div className="modal-overlay" onClick={() => setShowCart(false)}>
-          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h2 className="modal-header">Warenkorb</h2>
-            {cart.length > 0 ? (
-              <>
-                <ul>
-                  {cart.map((item) => (
-                    <li
-                      key={item._id}
-                      className="flex justify-between items-center"
-                    >
-                      <span>
-                        {item.name} (x{item.quantity}) - {item.price * item.quantity} €
-                      </span>
-                      <div className="flex items-center space-x-2">
-                        {/* Botón para disminuir cantidad */}
-                        <button
-                          onClick={() => removeOneFromCart(item._id)}
-                          className="text-yellow-500 hover:text-yellow-700"
-                          title="Reduzca la cantidad"
-                        >
-                          <FaMinus />
-                        </button>
-
-                        {/* Botón para agregar más */}
-                        <button
-                          onClick={() => addToCart(item)}
-                          className="text-green-500 hover:text-green-700"
-                          title="Agregar uno más"
-                        >
-                          <FaPlus />
-                        </button>
-
-                        {/* Botón para eliminar completamente */}
-                        <button
-                          onClick={() => removeFromCart(item._id)}
-                          className="text-red-500 hover:text-red-700"
-                          title="Eliminar producto"
-                        >
-                          <FaTrash />
-                        </button>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-4 flex justify-between">
-                  <button
-                    onClick={() => clearCart()}
-                    className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-                  >
-                    Warenkorb leeren
-                  </button>
-                  <span className="font-bold text-lg">
-                    Gesamtpreis: {getTotalPrice()} €
-                  </span>
-                </div>
-              </>
-            ) : (
-              <p>Ihr Warenkorb ist leer</p>
-            )}
-            <button className="modal-close" onClick={() => setShowCart(false)}>
-              Schließen
-            </button>
+  <div className="modal-overlay" onClick={() => setShowCart(false)}>
+    <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+      <h2 className="modal-header">Warenkorb</h2>
+      {cart.length > 0 ? (
+        <>
+          <ul>
+            {cart.map((item) => (
+              <li key={item._id} className="flex justify-between">
+                <span>{item.name} (x{item.quantity})</span>
+                <button
+                  onClick={() => removeFromCart(item._id)}
+                  className="text-red-500 hover:underline"
+                >
+                  Löschen
+                </button>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-4 flex justify-between items-center">
+            <span className="text-lg font-semibold">Gesamtpreis:</span>
+            <span className="text-xl font-bold text-green-500">
+              {useCartStore.getState().getTotalPrice()} €
+            </span>
           </div>
-        </div>
+        </>
+      ) : (
+        <p>Ihr Warenkorb ist leer</p>
       )}
+      <button className="modal-close" onClick={() => setShowCart(false)}>
+        Schließen
+      </button>
+    </div>
+  </div>
+)}
+
+
 
       {/* Footer */}
       <footer className="bg-gray-800 text-white p-6 text-center">
-        <p>
-          © {new Date().getFullYear()} Alix Ivonne Chaparro Vasquez. Alle Rechte
-          vorbehalten.
-        </p>
+        <p>© {new Date().getFullYear()} Alix Ivonne Chaparro Vasquez. Alle Rechte vorbehalten.</p>
       </footer>
     </div>
   );
