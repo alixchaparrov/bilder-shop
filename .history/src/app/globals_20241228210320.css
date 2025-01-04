@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Color Variables */
+:root {
+  --background: #f5f5f5;
+  --foreground: #333333;
+  --primary: #00704A;
+  --secondary: #FFB400;
+  --accent: #D62828;
+}
+
+.dark {
+  --background: #121212;
+  --foreground: #e0e0e0;
+  --primary: #34D399;
+  --secondary: #FACC15;
+  --accent: #EF4444;
+}
+
+/* General Styles */
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Navbar */
+.navbar {
+  @apply fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-4;
+  background-color: var(--primary);
+  color: white;
+}
+
+.navbar input {
+  @apply px-4 py-2 rounded-md border;
+  border-color: var(--secondary);
+  color: var(--foreground);
+}
+
+/* Cards */
+.card {
+  @apply bg-white dark:bg-gray-800 text-black dark:text-white shadow-lg rounded-lg p-6 transition-all;
+}
+
+.card:hover {
+  @apply transform scale-105 shadow-xl;
+}
+
+.card-title {
+  @apply text-xl font-bold;
+}
+
+.card-description {
+  @apply text-sm text-gray-600 dark:text-gray-400;
+}
+
+.card-price {
+  @apply text-lg font-bold text-primary;
+}
+
+/* Buttons */
+.btn-primary {
+  @apply bg-primary text-white px-4 py-2 rounded-md shadow;
+  transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+  @apply bg-green-700;
+}
+
+.btn-secondary {
+  @apply bg-secondary text-black px-4 py-2 rounded-md shadow;
+}
+
+.btn-secondary:hover {
+  @apply bg-yellow-600;
+}
+
+.btn-gray {
+  @apply bg-gray-300 text-black px-4 py-2 rounded-md;
+}
+
+.btn-gray:disabled {
+  @apply bg-gray-200 text-gray-400 cursor-not-allowed;
+}
+
+/* Cart Button */
+.cart-button {
+  @apply relative;
+}
+
+.cart-counter {
+  @apply absolute -top-2 -right-2 bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center;
+}
+
+/* Modal */
+.modal-content {
+  @apply bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg;
+}
+
+/* Footer */
+footer {
+  @apply bg-gray-800 text-white text-center py-4;
+}
+
+/* Utilities */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

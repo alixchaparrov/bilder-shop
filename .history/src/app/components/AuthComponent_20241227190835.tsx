@@ -1,0 +1,69 @@
+import { useState } from "react";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/lib/firebaseConfig"; // Asegúrate de que esto esté correctamente importado
+import { FaGoogle } from "react-icons/fa";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth"; // Importa el provider de Google
+
+const AuthComponent = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  // Función para validar la dirección de correo
+  const isValidEmail = (email) => {
+    const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    return regex.test(email);
+  };
+
+  const handleSignup = async () => {
+    if (!isValidEmail(email)) {
+      setErrorMessage("Bitte geben Sie eine gültige E-Mail-Adresse ein.");
+      return;
+    }
+    setErrorMessage(""); // Limpiar el mensaje de error
+
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      alert("Erfolgreich registriert");
+    } catch (error) {
+      setErrorMessage("Fehler bei der Registrierung: " + error.message);
+    }
+  };
+
+  const handleLogin = async () => {
+    if (!isValidEmail(email)) {
+      setErrorMessage("Bitte geben Sie eine gültige E-Mail-Adresse ein.");
+      return;
+    }
+    setErrorMessage(""); // Limpiar el mensaje de error
+
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      alert("Erfolgreich angemeldet");
+    } catch (error) {
+      setErrorMessage("Fehler bei der Anmeldung: " + error.message);
+    }
+  };
+
+  // Función para iniciar sesión con Google
+  const handleGoogleLogin = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      await signInWithPopup(auth, provider);
+      alert("Erfolgreich mit Google angemeldet");
+    } catch (error) {
+      setErrorMessage("Fehler bei der Anmeldung mit Google: " + error.message);
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      {errorMessage && (
+        <div className="text-red-500 text-center mb-4">{errorMessage}</div>
+      )}
+      <input
+        type="email"
+        placeholder="E-Mail eingeben"
+        className="w-full p-4 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-500"
+        value={email}
+        onChange={(e) =

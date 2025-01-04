@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Variables de color */
+:root {
+  --background: #f9f9f9;
+  --foreground: #333333;
+  --primary: #00704A;
+  --secondary: #FFB400;
+  --accent: #D62828;
+  --card-bg: #ffffff;
+  --card-text: #333333;
+}
+
+.dark {
+  --background: #121212;
+  --foreground: #e0e0e0;
+  --primary: #34D399;
+  --secondary: #FACC15;
+  --accent: #EF4444;
+  --card-bg: #1E1E1E;
+  --card-text: #e0e0e0;
+}
+
+/* General Styles */
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+
+/* Navbar */
+.navbar {
+  @apply fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-4;
+  background-color: var(--primary);
+  color: white;
+}
+
+.navbar input {
+  @apply px-4 py-2 rounded border;
+  border-color: var(--secondary);
+  color: var(--foreground);
+}
+
+/* Cards */
+.card {
+  @apply bg-white dark:bg-gray-800 rounded-lg shadow-lg;
+  background-color: var(--card-bg);
+  color: var(--card-text);
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+.card-title {
+  @apply text-lg font-bold;
+}
+
+.card-price {
+  @apply text-sm font-medium text-accent;
+}
+
+/* Buttons */
+.btn-green {
+  @apply bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600;
+}
+
+.btn-disabled {
+  @apply bg-gray-400 text-gray-700 px-4 py-2 rounded-lg cursor-not-allowed;
+}
+
+/* Cart Button */
+.cart-button {
+  position: relative;
+}
+
+.cart-counter {
+  @apply absolute -top-2 -right-2 bg-red-500 text-white w-6 h-6 rounded-full flex items-center justify-center;
+}
+
+/* Modal */
+.modal-content {
+  @apply bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg;
+  color: var(--foreground);
+}
+
+.Toastify__toast {
+  @apply px-4 py-2 rounded;
+  background-color: var(--foreground);
+  color: var(--background);
+}
+
+.dark .Toastify__toast {
+  background-color: var(--card-bg);
+  color: var(--foreground);
+}
+
+.Toastify__close-button > svg {
+  fill: var(--background);
+}
+
+.dark .Toastify__close-button > svg {
+  fill: var(--foreground);
+}

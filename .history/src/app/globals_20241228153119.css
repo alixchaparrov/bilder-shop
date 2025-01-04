@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Variables de color */
+:root {
+  --background: #f9f9f9;
+  --foreground: #333333;
+  --primary: #00704A;
+  --secondary: #FFB400;
+  --accent: #D62828;
+  --card-bg: #ffffff;
+  --card-text: #333333;
+}
+
+.dark {
+  --background: #121212;
+  --foreground: #e0e0e0;
+  --primary: #34D399;
+  --secondary: #FACC15;
+  --accent: #EF4444;
+  --card-bg: #1E1E1E;
+  --card-text: #e0e0e0;
+}
+
+
+/* Estilo general */
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+}
+
+/* Espaciado adicional */
+main {
+  padding-top: 7rem; /* Espacio debajo del Navbar */
+}
+
+/* Botones */
+.btn-primary {
+  @apply px-4 py-2 font-bold rounded transition duration-300;
+}
+
+.btn-green {
+  @apply bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 active:scale-95 shadow-sm;
+}
+
+.btn-yellow {
+  @apply bg-yellow-500 text-black px-4 py-2 rounded-lg hover:bg-yellow-600 active:scale-95 shadow-sm;
+}
+
+.btn-gray {
+  @apply bg-gray-600 text-gray-400 opacity-50 cursor-not-allowed shadow-none px-4 py-2;
+}
+
+/* Botón del carrito */
+.cart-button {
+  position: relative;
+}
+
+.cart-counter {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: var(--accent);
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Iconos */
+.icon-cart {
+  @apply flex items-center justify-center rounded-full p-2 shadow-md;
+  background-color: var(--secondary);
+  color: var(--foreground);
+  transition: transform 0.3s;
+}
+
+.icon-cart:hover {
+  @apply scale-105;
+}
+
+/* Modal del carrito */
+.modal-overlay {
+  @apply fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50;
+}
+
+.modal-content {
+  @apply bg-white text-black dark:bg-gray-800 dark:text-white p-6 rounded-lg shadow-lg max-w-lg w-full;
+}
+
+.modal-header {
+  @apply text-lg font-bold mb-4 text-center;
+}
+
+/* Estilo para react-toastify */
+.Toastify__toast {
+  @apply px-4 py-2 rounded shadow-lg;
+  background-color: var(--foreground);
+  color: var(--background);
+}
+
+.dark .Toastify__toast {
+  background-color: #1f2937; /* Fondo oscuro */
+  color: white; /* Texto claro */
+}
+
+.Toastify__close-button > svg {
+  fill: var(--background);
+}
+
+.dark .Toastify__close-button > svg {
+  fill: white;
+}
+
+/* Ajustes adicionales */
+input[type="text"] {
+  @apply px-4 py-2 rounded border focus:outline-none focus:ring-2 focus:ring-secondary;
+  transition: box-shadow 0.3s;
+}
+
+button {
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+/* Contenedor de las tarjetas */
+.grid-container {
+  @apply gap-8;
+}
+
+/* Estilo de las tarjetas */
+.card {
+  @apply bg-card shadow-card rounded-lg overflow-hidden flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-lg;
+}
+
+.card-title {
+  @apply text-lg sm:text-xl font-serif font-bold;
+}
+
+.card-description {
+  @apply text-sm sm:text-base text-gray-600 dark:text-gray-300;
+}
+
+.card-price {
+  @apply text-lg font-semibold text-accent mt-2;
+}
+
+/* Estilo del Navbar */
+.navbar {
+  @apply bg-primary text-textLight fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-4 shadow-md;
+}
+
+.navbar input {
+  @apply bg-white border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-secondary;
+}
+
+.footer {
+  @apply bg-gray-800 text-white text-center py-6;
+}

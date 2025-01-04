@@ -1,0 +1,228 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Variables de color */
+:root {
+  --background: #ffffff; /* Fondo claro */
+  --foreground: #000000; /* Texto oscuro */
+  --primary: #00704A; /* Verde primario */
+  --secondary: #FFB400; /* Amarillo vibrante */
+  --accent: #D62828; /* Rojo cálido */
+}
+
+.dark {
+  --background: #000000; /* Fondo oscuro */
+  --foreground: #ffffff; /* Texto claro */
+  --primary: #34D399; /* Verde más claro para fondo oscuro */
+  --secondary: #FACC15; /* Amarillo claro para fondo oscuro */
+  --accent: #EF4444; /* Rojo vibrante */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+/* Estilo general */
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6; /* Mejor legibilidad */
+}
+
+/* Espaciado adicional */
+main {
+  padding-top: 6rem; /* Más espacio debajo de la barra de navegación */
+}
+
+/* Botones */
+.btn-primary {
+  @apply px-4 py-2 font-bold rounded transition duration-300;
+}
+
+.btn-green {
+  @apply bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 active:scale-95 shadow-sm;
+}
+
+.btn-yellow {
+  @apply bg-yellow-500 text-black px-4 py-2 rounded-lg hover:bg-yellow-600 active:scale-95 shadow-sm;
+}
+
+.btn-gray {
+  @apply bg-gray-600 text-gray-400 opacity-50 cursor-not-allowed shadow-none px-4 py-2;
+}
+
+/* Botón del carrito */
+.cart-button {
+  @apply relative flex items-center justify-center p-2 rounded-full bg-yellow-500 hover:bg-yellow-600 transition-colors duration-300 shadow-md;
+}
+
+.cart-counter {
+  @apply absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold shadow-lg;
+}
+
+/* Iconos */
+.icon-cart {
+  @apply flex items-center justify-center rounded-full p-2 shadow-md;
+  background-color: var(--secondary);
+  color: var(--foreground);
+  transition: transform 0.3s;
+}
+
+.icon-cart:hover {
+  @apply scale-105;
+}
+
+.icon-cart-badge {
+  @apply absolute bg-red-500 text-white rounded-full flex items-center justify-center text-xs font-bold;
+  width: 1.5rem;
+  height: 1.5rem;
+  top: -0.5rem;
+  right: -0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal del carrito */
+.modal-overlay {
+  @apply fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50;
+}
+
+.modal-content {
+  @apply bg-white text-black dark:bg-gray-800 dark:text-gray-200 p-6 rounded-lg shadow-lg max-w-lg w-full;
+}
+
+.modal-content .text-lg {
+  font-size: 1.125rem;
+}
+
+.modal-content .text-xl {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--primary); /* Usa tu color principal */
+}
+
+
+.modal-header {
+  @apply text-lg font-bold mb-4 text-center;
+}
+
+.modal-close {
+  @apply mt-4 w-full bg-gray-800 text-white py-2 rounded hover:bg-gray-700 dark:bg-gray-600 dark:hover:bg-gray-500;
+}
+
+/* Estilo para las tarjetas */
+.card {
+  @apply bg-card shadow-card rounded-lg overflow-hidden flex flex-col transition-transform duration-300 hover:scale-105 hover:shadow-lg;
+}
+
+.card-title {
+  @apply text-lg sm:text-xl font-serif font-bold;
+}
+
+.card-description {
+  @apply text-sm sm:text-base text-gray-600;
+}
+
+.card-price {
+  @apply text-lg font-semibold text-accent mt-2;
+}
+
+.cart-button {
+  @apply relative flex items-center justify-center p-2 rounded-full bg-yellow-500 hover:bg-yellow-600 transition-colors duration-300 shadow-md;
+}
+
+.cart-counter {
+  @apply absolute -top-1 -right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold shadow-lg;
+}
+
+/* Estilo para inputs */
+input[type="text"] {
+  @apply px-4 py-2 rounded border focus:outline-none focus:ring-2 focus:ring-secondary;
+  transition: box-shadow 0.3s;
+  color: #000 !important;
+}
+
+/* Transiciones suaves */
+button {
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+/* Contenedor de las tarjetas */
+.grid-container {
+  @apply gap-8;
+}
+
+
+/* Ajustes específicos para el diseño */
+.navbar {
+  @apply bg-primary text-textLight fixed top-0 left-0 right-0 z-50 flex justify-between items-center p-4;
+}
+
+.navbar input {
+  @apply bg-white border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-secondary;
+}
+
+.footer {
+  @apply bg-gray-800 text-white text-center py-6;
+}
+
+.modal {
+  position: fixed; /* Para que esté fijo en la pantalla */
+  top: 50%; /* Centrar verticalmente */
+  left: 50%; /* Centrar horizontalmente */
+  transform: translate(-50%, -50%); /* Ajuste para centrar correctamente */
+  z-index: 1000; /* Asegúrate de que esté encima de otros elementos */
+  background-color: white; /* Fondo del modal */
+  padding: 20px; /* Espaciado interno */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+  width: 90%; /* Ajusta el ancho según lo que necesites */
+  max-width: 400px; /* Ancho máximo */
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); /* Fondo semitransparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999; /* Por encima de todo */
+}
+
+.modal-content {
+  background: white;
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Sombra */
+  padding: 20px;
+  width: 90%; /* Asegura que se adapte a pantallas pequeñas */
+  max-width: 400px; /* Ancho máximo */
+  animation: fadeIn 0.3s ease-in-out; /* Animación */
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
