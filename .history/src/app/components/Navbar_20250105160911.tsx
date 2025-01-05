@@ -6,7 +6,6 @@ import AuthModal from "../components/AuthModalContent";
 import { useCartStore } from "@/store/cartStore";
 import { useAuth } from "../../context/AuthContext";
 import { FaShoppingCart, FaMoon, FaSun } from "react-icons/fa";
-import Link from "next/link";
 
 export default function Navbar({
   searchQuery,
@@ -65,7 +64,7 @@ export default function Navbar({
                   className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
                 > 
                   Dashboard
-                </Link>
+                </a>
               )}
               <button
                 onClick={logout}

@@ -6,7 +6,6 @@ import AuthModal from "../components/AuthModalContent";
 import { useCartStore } from "@/store/cartStore";
 import { useAuth } from "../../context/AuthContext";
 import { FaShoppingCart, FaMoon, FaSun } from "react-icons/fa";
-import Link from "next/link";
 
 export default function Navbar({
   searchQuery,
