@@ -40,26 +40,23 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-lg shadow-lg p-6 w-full max-w-sm"
+        className="modal-container"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center space-x-2">
-            <FaUser size={24} className="text-green-600" />
-            <h2 className="text-lg font-semibold text-gray-800">
-              {isRegistering ? "Registrieren" : "Anmelden"}
-            </h2>
-          </div>
-          <button
-            onClick={onClose}
-            className="text-gray-600 hover:text-gray-800 focus:outline-none"
-          >
-            &times;
-          </button>
+        {/* Botón de cierre */}
+        <button className="modal-close" onClick={onClose}>
+          &times;
+        </button>
+
+        {/* Título */}
+        <div className="flex items-center space-x-2 mb-6">
+          <FaUser size={24} className="text-green-600" />
+          <h2 className="text-lg font-semibold text-gray-800">
+            {isRegistering ? "Registrieren" : "Anmelden"}
+          </h2>
         </div>
 
-        {/* Form */}
+        {/* Formulario */}
         <form onSubmit={handleSubmit} className="space-y-4">
           {error && <p className="text-red-500 text-sm">{error}</p>}
           {isRegistering && (
@@ -75,7 +72,7 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-black"
+                className="input"
                 required
               />
             </div>
@@ -92,7 +89,7 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-black"
+              className="input"
               required
             />
           </div>
@@ -109,7 +106,7 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-black"
+                className="input"
                 required
               />
               <button
@@ -121,51 +118,47 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
               </button>
             </div>
           </div>
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-md focus:outline-none"
-          >
-            {loading
-              ? "Bitte warten..."
-              : isRegistering
-              ? "Registrieren"
-              : "Anmelden"}
-          </button>
+
+          {/* Botones y enlaces */}
+          <div className="button-container">
+            <button
+              type="submit"
+              className="button"
+              disabled={loading}
+            >
+              {loading
+                ? "Bitte warten..."
+                : isRegistering
+                ? "Registrieren"
+                : "Anmelden"}
+            </button>
+            <p className="text-center text-sm mt-2">
+              {isRegistering ? (
+                <span>
+                  Haben Sie ein Konto?{" "}
+                  <button
+                    type="button"
+                    onClick={() => setIsRegistering(false)}
+                    className="link"
+                  >
+                    Anmelden
+                  </button>
+                </span>
+              ) : (
+                <span>
+                  Noch kein Konto?{" "}
+                  <button
+                    type="button"
+                    onClick={() => setIsRegistering(true)}
+                    className="link"
+                  >
+                    Registrieren
+                  </button>
+                </span>
+              )}
+            </p>
+          </div>
         </form>
-
-      
-{/* Footer */}
-<div className="flex flex-col items-center mt-4 w-full">
-  {isRegistering ? (
-    <p className="text-sm text-gray-800 text-center w-full">
-      Haben Sie ein Konto?{" "}
-      <button
-        type="button"
-        onClick={() => setIsRegistering(false)}
-        className="text-blue-500 hover:underline focus:outline-none"
-      >
-        Anmelden
-      </button>
-    </p>
-  ) : (
-    <p className="text-sm text-gray-800 text-center w-full">
-      Noch kein Konto?{" "}
-      <button
-        type="button"
-        onClick={() => setIsRegistering(true)}
-        className="text-blue-500 hover:underline focus:outline-none"
-      >
-        Registrieren
-      </button>
-    </p>
-  )}
-</div>
-
-
-
-
-
       </div>
     </div>
   );

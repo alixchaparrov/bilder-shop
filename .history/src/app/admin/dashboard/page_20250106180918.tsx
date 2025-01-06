@@ -8,13 +8,7 @@ export default function AdminDashboard() {
   const { user, logout } = useAuth();
   const router = useRouter();
   const [users, setUsers] = useState([]);
-  const [form, setForm] = useState({
-    id: null,
-    name: "",
-    email: "",
-    password: "",
-    role: "user",
-  });
+  const [form, setForm] = useState({ id: null, name: "", email: "", role: "user" });
 
   useEffect(() => {
     if (!user || user.role !== "admin") {
@@ -24,7 +18,6 @@ export default function AdminDashboard() {
     }
   }, [user, router]);
 
-  // Fetch users from the API
   const fetchUsers = async () => {
     try {
       const response = await fetch("/api/users");
@@ -35,7 +28,6 @@ export default function AdminDashboard() {
     }
   };
 
-  // Handle Delete
   const handleDelete = async (id) => {
     if (confirm("Are you sure you want to delete this user?")) {
       try {
@@ -47,12 +39,10 @@ export default function AdminDashboard() {
     }
   };
 
-  // Handle Edit
   const handleEdit = (user) => {
-    setForm(user); // Load user data into the form for editing
+    setForm(user);
   };
 
-  // Handle Form Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     const method = form.id ? "PUT" : "POST";
@@ -62,17 +52,12 @@ export default function AdminDashboard() {
       const response = await fetch(url, {
         method,
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          password: form.password || undefined, // Send password only if creating a new user
-          role: form.role,
-        }),
+        body: JSON.stringify({ name: form.name, email: form.email, role: form.role }),
       });
 
       if (response.ok) {
-        fetchUsers(); // Reload users
-        setForm({ id: null, name: "", email: "", password: "", role: "user" }); // Reset form
+        fetchUsers();
+        setForm({ id: null, name: "", email: "", role: "user" });
       } else {
         console.error("Error saving user:", await response.json());
       }
@@ -82,7 +67,7 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100">
       {/* Header */}
       <header className="bg-green-600 text-white p-6 shadow-md">
         <div className="flex justify-between items-center max-w-7xl mx-auto">
@@ -97,22 +82,19 @@ export default function AdminDashboard() {
       </header>
 
       {/* User Management Section */}
-      <main className="flex-grow max-w-7xl mx-auto p-6">
+      <main className="max-w-7xl mx-auto p-6">
         <div className="bg-white shadow-md rounded-lg p-6">
           <h2 className="text-2xl font-semibold text-gray-700 mb-6">User Management</h2>
 
           {/* Form */}
-          <form
-            onSubmit={handleSubmit}
-            className="mb-6 grid grid-cols-1 sm:grid-cols-4 gap-4"
-          >
+          <form onSubmit={handleSubmit} className="mb-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
             <input
               type="text"
               placeholder="Name"
               value={form.name}
               onChange={(e) => setForm({ ...form, name: e.target.value })}
               required
-              className="p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-green-200 text-gray-900"
+              className="p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-green-200"
             />
             <input
               type="email"
@@ -120,26 +102,19 @@ export default function AdminDashboard() {
               value={form.email}
               onChange={(e) => setForm({ ...form, email: e.target.value })}
               required
-              className="p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-green-200 text-gray-900"
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              value={form.password}
-              onChange={(e) => setForm({ ...form, password: e.target.value })}
-              className="p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-green-200 text-gray-900"
+              className="p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-green-200"
             />
             <select
               value={form.role}
               onChange={(e) => setForm({ ...form, role: e.target.value })}
-              className="p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-green-200 text-gray-900"
+              className="p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-green-200"
             >
               <option value="user">User</option>
               <option value="admin">Admin</option>
             </select>
             <button
               type="submit"
-              className="col-span-1 sm:col-span-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition-all"
+              className="col-span-1 sm:col-span-3 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg shadow-md transition-all"
             >
               {form.id ? "Update User" : "Add User"}
             </button>
@@ -148,7 +123,7 @@ export default function AdminDashboard() {
           {/* Users Table */}
           <table className="w-full border-collapse bg-white rounded-lg shadow-md overflow-hidden">
             <thead>
-              <tr className="bg-gray-200 text-gray-900">
+              <tr className="bg-gray-200">
                 <th className="border p-3 text-left">ID</th>
                 <th className="border p-3 text-left">Name</th>
                 <th className="border p-3 text-left">Email</th>
@@ -158,7 +133,7 @@ export default function AdminDashboard() {
             </thead>
             <tbody>
               {users.map((user) => (
-                <tr key={user.id} className="hover:bg-gray-100 text-gray-900">
+                <tr key={user.id} className="hover:bg-gray-100">
                   <td className="border p-3">{user.id}</td>
                   <td className="border p-3">{user.name}</td>
                   <td className="border p-3">{user.email}</td>
@@ -185,7 +160,7 @@ export default function AdminDashboard() {
       </main>
 
       {/* Footer */}
-      <footer className="bg-gray-800 text-white text-center py-4 mt-auto">
+      <footer className="bg-gray-800 text-white text-center py-4">
         &copy; {new Date().getFullYear()} Kolumbianische Gemälde. Alle Rechte vorbehalten.
       </footer>
     </div>

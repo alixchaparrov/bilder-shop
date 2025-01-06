@@ -165,7 +165,6 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
 
 
 
-
       </div>
     </div>
   );

@@ -243,29 +243,6 @@ button:active {
   color: #000;
 }
 
-.link {
-  display: block;
-  text-align: center;
-  margin-top: 10px; /* Espaciado superior opcional */
-  font-size: 14px;
-  color: #00704A;
-  text-decoration: underline;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.link:hover {
-  color: #005c3a;
-}
-
-.footer-link {
-  display: block;
-  text-align: center;
-  margin-top: 1rem; /* Espaciado superior */
-  width: 100%; /* Asegura que ocupe todo el ancho disponible */
-}
-
-
 
 
 

@@ -258,13 +258,6 @@ button:active {
   color: #005c3a;
 }
 
-.footer-link {
-  display: block;
-  text-align: center;
-  margin-top: 1rem; /* Espaciado superior */
-  width: 100%; /* Asegura que ocupe todo el ancho disponible */
-}
-
 
 
 

@@ -138,7 +138,7 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
 {/* Footer */}
 <div className="flex flex-col items-center mt-4 w-full">
   {isRegistering ? (
-    <p className="text-sm text-gray-800 text-center w-full">
+    <p className="text-sm text-center w-full">
       Haben Sie ein Konto?{" "}
       <button
         type="button"
@@ -149,7 +149,7 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
       </button>
     </p>
   ) : (
-    <p className="text-sm text-gray-800 text-center w-full">
+    <p className="text-sm text-center w-full">
       Noch kein Konto?{" "}
       <button
         type="button"
@@ -161,8 +161,6 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
     </p>
   )}
 </div>
-
-
 
 
 

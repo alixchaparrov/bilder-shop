@@ -134,38 +134,33 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
           </button>
         </form>
 
-      
-{/* Footer */}
-<div className="flex flex-col items-center mt-4 w-full">
-  {isRegistering ? (
-    <p className="text-sm text-gray-800 text-center w-full">
-      Haben Sie ein Konto?{" "}
-      <button
-        type="button"
-        onClick={() => setIsRegistering(false)}
-        className="text-blue-500 hover:underline focus:outline-none"
-      >
-        Anmelden
-      </button>
-    </p>
-  ) : (
-    <p className="text-sm text-gray-800 text-center w-full">
-      Noch kein Konto?{" "}
-      <button
-        type="button"
-        onClick={() => setIsRegistering(true)}
-        className="text-blue-500 hover:underline focus:outline-none"
-      >
-        Registrieren
-      </button>
-    </p>
-  )}
-</div>
-
-
-
-
-
+        {/* Footer */}
+        
+        <div className="flex flex-col items-center">
+          {isRegistering ? (
+            <p>
+              Haben Sie ein Konto?{" "}
+              <button
+                type="button"
+                onClick={() => setIsRegistering(false)}
+                className="text-blue-500 hover:underline focus:outline-none"
+              >
+                Anmelden
+              </button>
+            </p>
+          ) : (
+            <p>
+              Noch kein Konto?{" "}
+              <button
+                type="button"
+                onClick={() => setIsRegistering(true)}
+                className="text-blue-500 hover:underline focus:outline-none"
+              >
+                Registrieren
+              </button>
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );

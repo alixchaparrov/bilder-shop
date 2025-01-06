@@ -243,30 +243,78 @@ button:active {
   color: #000;
 }
 
-.link {
-  display: block;
+/* Contenedor del modal */
+.modal-container {
+  position: relative;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Botón de cierre */
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #555;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.modal-close:hover {
+  color: #000;
+}
+
+/* Botón principal */
+.button {
+  width: 100%;
+  padding: 12px 20px;
+  background-color: #00704A; /* Verde más atractivo */
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
   text-align: center;
-  margin-top: 10px; /* Espaciado superior opcional */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button:hover {
+  background-color: #005c3a;
+  transform: scale(1.03);
+}
+
+/* Enlace */
+.link {
+  margin-top: 10px;
   font-size: 14px;
   color: #00704A;
   text-decoration: underline;
   cursor: pointer;
-  transition: color 0.2s ease;
 }
 
 .link:hover {
   color: #005c3a;
 }
 
-.footer-link {
-  display: block;
-  text-align: center;
-  margin-top: 1rem; /* Espaciado superior */
-  width: 100%; /* Asegura que ocupe todo el ancho disponible */
+/* Contenedor de botones */
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-top: 20px;
 }
-
-
-
 
 
 
