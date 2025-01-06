@@ -20,8 +20,8 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
     setLoading(true);
     try {
       if (isRegistering) {
-        await register(name, email, password);
-        alert("Registrierung erfolgreich");
+        await register(vorname, nachname, email, passwort, handy, addresse, stadtpostaleit);
+        alert("Benutzer erfolgreich registriert");
       } else {
         await login(email, password);
         alert("Anmeldung erfolgreich");
@@ -73,6 +73,7 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
               <input
                 id="name"
                 type="text"
+                placeholder="Benutzername"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-black"
@@ -90,6 +91,7 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
             <input
               id="email"
               type="email"
+              placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-black"
@@ -107,9 +109,10 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
               <input
                 id="password"
                 type={showPassword ? "text" : "password"}
+                placeholder="●●●●●●"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-black"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm appearance-none text-black"
                 required
               />
               <button
@@ -123,8 +126,8 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
           </div>
           <button
             type="submit"
-            disabled={loading}
             className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-md focus:outline-none"
+            disabled={loading}
           >
             {loading
               ? "Bitte warten..."
@@ -138,7 +141,7 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
         <div className="mt-4 text-sm text-center">
           {isRegistering ? (
             <p>
-              Haben Sie ein Konto?{" "}
+              Haben Sie schon ein Konto?{" "}
               <button
                 type="button"
                 onClick={() => setIsRegistering(false)}
@@ -149,7 +152,7 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
             </p>
           ) : (
             <p>
-              Noch kein Konto?{" "}
+              Haben Sie noch kein Konto?{" "}
               <button
                 type="button"
                 onClick={() => setIsRegistering(true)}

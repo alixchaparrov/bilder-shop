@@ -43,7 +43,6 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
         className="bg-white rounded-lg shadow-lg p-6 w-full max-w-sm"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-2">
             <FaUser size={24} className="text-green-600" />
@@ -59,15 +58,11 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
           </button>
         </div>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           {error && <p className="text-red-500 text-sm">{error}</p>}
           {isRegistering && (
             <div>
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-gray-700"
-              >
+              <label htmlFor="name" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-black">
                 Benutzername
               </label>
               <input
@@ -75,16 +70,12 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-black"
-                required
+                className="w-full p-2 border rounded"
               />
             </div>
           )}
           <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="email" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-black">
               Email-Adresse
             </label>
             <input
@@ -92,15 +83,11 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-black"
-              required
+              className="w-full p-2 border rounded"
             />
           </div>
           <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="password" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-black">
               Passwort
             </label>
             <div className="relative">
@@ -109,13 +96,12 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
                 type={showPassword ? "text" : "password"}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-black"
-                required
+                className="w-full p-2 border rounded"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500 focus:outline-none"
+                className="absolute inset-y-0 right-0 px-3 text-gray-500"
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
@@ -124,7 +110,7 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded-md focus:outline-none"
+            className="w-full bg-blue-500 text-white p-2 rounded"
           >
             {loading
               ? "Bitte warten..."
@@ -134,7 +120,6 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
           </button>
         </form>
 
-        {/* Footer */}
         <div className="mt-4 text-sm text-center">
           {isRegistering ? (
             <p>
@@ -142,7 +127,7 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
               <button
                 type="button"
                 onClick={() => setIsRegistering(false)}
-                className="text-blue-500 hover:underline focus:outline-none"
+                className="text-blue-500"
               >
                 Anmelden
               </button>
@@ -153,7 +138,7 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
               <button
                 type="button"
                 onClick={() => setIsRegistering(true)}
-                className="text-blue-500 hover:underline focus:outline-none"
+                className="text-blue-500"
               >
                 Registrieren
               </button>
