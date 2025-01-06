@@ -1,3 +1,4 @@
+
 import { createContext, useContext, useState } from "react";
 
 interface User {
@@ -10,6 +11,7 @@ interface User {
 interface AuthContextType {
   user: User | null;
   login: (email: string, password: string) => Promise<void>;
+  register: (name: string, email: string, password: string) => Promise<void>;
   logout: () => void;
 }
 
@@ -32,16 +34,22 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
     const data = await response.json();
     setUser(data.user);
+
+    // Redirección según el rol
+    if (data.user.role === "admin") {
+      window.location.href = "/admin/dashboard";
+    } else {
+      window.location.href = "/";
+    }
   };
 
   const logout = (): void => {
     setUser(null);
-    window.localStorage.clear(); // Limpia almacenamiento local
-    window.location.href = "/"; // Redirige al inicio
+    window.location.href = "/"; // Redirigir al inicio
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, register: async () => {}, logout }}>
       {children}
     </AuthContext.Provider>
   );

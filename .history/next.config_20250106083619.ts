@@ -11,5 +11,16 @@ const nextConfig: NextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = {
+  async headers() {
+    return [
+      {
+        source: "/api/(.*)", // Aplica a todas las rutas API
+        headers: [
+          { key: "Cache-Control", value: "no-store, max-age=0" },
+        ],
+      },
+    ];
+  },
+};
 

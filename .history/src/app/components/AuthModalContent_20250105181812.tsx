@@ -18,17 +18,18 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
     e.preventDefault();
     setError(null);
     setLoading(true);
+
     try {
       if (isRegistering) {
         await register(name, email, password);
-        alert("Benutzer erfolgreich registriert");
+        alert("Benutzer erfolgreich registriert"); // Usuario registrado exitosamente
       } else {
         await login(email, password);
-        alert("Anmeldung erfolgreich");
+        alert("Anmeldung erfolgreich"); // Inicio de sesión exitoso
       }
-      onClose();
+      onClose(); // Cerrar modal tras éxito
     } catch (err: any) {
-      setError(err.message || "Ein Fehler ist aufgetreten.");
+      setError(err.message || "Ein Fehler ist aufgetreten."); // Ocurrió un error
     } finally {
       setLoading(false);
     }
@@ -76,7 +77,7 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
                 placeholder="Benutzername"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-black"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 required
               />
             </div>
@@ -94,7 +95,7 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-black"
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               required
             />
           </div>
@@ -109,10 +110,10 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
               <input
                 id="password"
                 type={showPassword ? "text" : "password"}
-                placeholder="●●●●●●"
+                placeholder="Passwort"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm appearance-none text-black"
+                className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 required
               />
               <button
@@ -130,10 +131,10 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
             disabled={loading}
           >
             {loading
-              ? "Bitte warten..."
+              ? "Bitte warten..." // Por favor, espera
               : isRegistering
-              ? "Registrieren"
-              : "Anmelden"}
+              ? "Registrieren" // Registrarse
+              : "Anmelden"}  // Iniciar sesión
           </button>
         </form>
 

@@ -1,0 +1,1 @@
+Cuando el usuario admin se loguee que lo lleve a una pagina como esta (Imagen 1) y cuando cierre sesion que aparezca asi como al inicio (Imagen 2). 

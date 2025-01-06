@@ -1,8 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function AdminDashboard() {
   const { user, logout } = useAuth();
@@ -57,7 +58,9 @@ export default function AdminDashboard() {
       {/* Header */}
       <header className="bg-green-600 text-white p-6 shadow-md">
         <div className="flex justify-between items-center max-w-7xl mx-auto">
-          <h1 className="text-4xl font-extrabold tracking-wide">Admin Dashboard</h1>
+          <h1 className="text-4xl font-extrabold tracking-wide">
+            Admin Dashboard
+          </h1>
           <button
             onClick={logout}
             className="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg shadow-lg transition-all transform hover:scale-105"
@@ -75,7 +78,9 @@ export default function AdminDashboard() {
             className="cursor-pointer border rounded-lg shadow-md p-6 bg-gray-100 hover:shadow-xl transition-all transform hover:scale-105 text-center"
             onClick={() => setActiveSection("users")}
           >
-            <h2 className="text-xl font-bold text-gray-800 mb-4">User Management</h2>
+            <h2 className="text-xl font-bold text-gray-800 mb-4">
+              User Management
+            </h2>
             <p className="text-gray-600">Manage users, roles, and permissions.</p>
           </div>
 
@@ -83,7 +88,9 @@ export default function AdminDashboard() {
             className="cursor-pointer border rounded-lg shadow-md p-6 bg-gray-100 hover:shadow-xl transition-all transform hover:scale-105 text-center"
             onClick={() => setActiveSection("products")}
           >
-            <h2 className="text-xl font-bold text-gray-800 mb-4">Product Management</h2>
+            <h2 className="text-xl font-bold text-gray-800 mb-4">
+              Product Management
+            </h2>
             <p className="text-gray-600">Add, edit, and delete products.</p>
           </div>
 
@@ -92,7 +99,9 @@ export default function AdminDashboard() {
             onClick={() => setActiveSection("analytics")}
           >
             <h2 className="text-xl font-bold text-gray-800 mb-4">Analytics</h2>
-            <p className="text-gray-600">View application analytics and reports.</p>
+            <p className="text-gray-600">
+              View application analytics and reports.
+            </p>
           </div>
         </div>
 

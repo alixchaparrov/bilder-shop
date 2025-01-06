@@ -10,6 +10,7 @@ interface User {
 interface AuthContextType {
   user: User | null;
   login: (email: string, password: string) => Promise<void>;
+  register: (name: string, email: string, password: string) => Promise<void>;
   logout: () => void;
 }
 
@@ -34,14 +35,30 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setUser(data.user);
   };
 
-  const logout = (): void => {
-    setUser(null);
-    window.localStorage.clear(); // Limpia almacenamiento local
-    window.location.href = "/"; // Redirige al inicio
+  const logout = () => {
+    setUser(null); // Elimina el usuario del estado
+    localStorage.removeItem("authToken"); // Si usas un token en localStorage, asegúrate de eliminarlo
+    window.location.href = "/"; // Redirige al usuario a la página de inicio
+  };
+
+  const register = async (name: string, email: string, password: string): Promise<void> => {
+    const response = await fetch("/api/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, password }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.error);
+    }
+
+    const data = await response.json();
+    setUser(data.user);
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );

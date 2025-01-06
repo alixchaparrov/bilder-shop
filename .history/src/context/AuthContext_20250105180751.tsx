@@ -10,6 +10,7 @@ interface User {
 interface AuthContextType {
   user: User | null;
   login: (email: string, password: string) => Promise<void>;
+  register: (name: string, email: string, password: string) => Promise<void>;
   logout: () => void;
 }
 
@@ -34,14 +35,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     setUser(data.user);
   };
 
-  const logout = (): void => {
-    setUser(null);
-    window.localStorage.clear(); // Limpia almacenamiento local
-    window.location.href = "/"; // Redirige al inicio
-  };
-
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, register: async () => {}, logout: () => {} }}>
       {children}
     </AuthContext.Provider>
   );

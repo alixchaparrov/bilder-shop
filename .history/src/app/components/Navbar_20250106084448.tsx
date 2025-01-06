@@ -6,6 +6,7 @@ import { useAuth } from "../../context/AuthContext";
 import { FaShoppingCart, FaMoon, FaSun } from "react-icons/fa";
 import AuthModal from "../components/AuthModalContent";
 
+
 export default function Navbar({
   searchQuery,
   setSearchQuery,
@@ -81,11 +82,6 @@ export default function Navbar({
           </button>
         )}
       </div>
-
-      {/* Render del Modal */}
-      {isAuthModalOpen && (
-        <AuthModal onClose={() => setIsAuthModalOpen(false)} />
-      )}
     </nav>
   );
 }
