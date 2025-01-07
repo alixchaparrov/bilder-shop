@@ -1,7 +1,6 @@
 "use client";
 
 import { useCartStore } from "@/store/cartStore";
-import "react-toastify/dist/ReactToastify.css";
 
 export default function CartModal({ onClose }: { onClose: () => void }) {
   const cart = useCartStore((state) => state.cart);

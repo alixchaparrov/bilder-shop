@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { FaUser, FaEye, FaEyeSlash } from "react-icons/fa";
-import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/router"; // Importamos el router
 
 export default function AuthModal({ onClose }: { onClose: () => void }) {
   const { login, register } = useAuth();
@@ -14,6 +14,7 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
   const [error, setError] = useState<string | null>(null);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const router = useRouter(); // Para redireccionar al usuario
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -44,7 +45,6 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
         className="bg-white rounded-lg shadow-lg p-6 w-full max-w-sm"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center space-x-2">
             <FaUser size={24} className="text-green-600" />
@@ -60,7 +60,6 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
           </button>
         </div>
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           {error && <p className="text-red-500 text-sm">{error}</p>}
           {isRegistering && (
@@ -135,33 +134,43 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
           </button>
         </form>
 
-      
-{/* Footer */}
-<div className="flex flex-col items-center mt-4 w-full">
-  {isRegistering ? (
-    <p className="text-sm text-gray-800 text-center w-full">
-      Haben Sie ein Konto?{" "}
-      <button
-        type="button"
-        onClick={() => setIsRegistering(false)}
-        className="text-blue-500 hover:underline focus:outline-none"
-      >
-        Anmelden
-      </button>
-    </p>
-  ) : (
-    <p className="text-sm text-gray-800 text-center w-full">
-      Noch kein Konto?{" "}
-      <button
-        type="button"
-        onClick={() => setIsRegistering(true)}
-        className="text-blue-500 hover:underline focus:outline-none"
-      >
-        Registrieren
-      </button>
-    </p>
-  )}
-</div>
+        {/* Footer */}
+        <div className="flex flex-col items-center mt-4 w-full">
+          {!isRegistering && (
+            <p className="text-sm text-gray-800 text-center w-full">
+              <button
+                type="button"
+                onClick={() => router.push("/update-password")}
+                className="text-blue-500 hover:underline focus:outline-none"
+              >
+                Passwort vergessen?
+              </button>
+            </p>
+          )}
+          {isRegistering ? (
+            <p className="text-sm text-gray-800 text-center w-full">
+              Haben Sie ein Konto?{" "}
+              <button
+                type="button"
+                onClick={() => setIsRegistering(false)}
+                className="text-blue-500 hover:underline focus:outline-none"
+              >
+                Anmelden
+              </button>
+            </p>
+          ) : (
+            <p className="text-sm text-gray-800 text-center w-full">
+              Noch kein Konto?{" "}
+              <button
+                type="button"
+                onClick={() => setIsRegistering(true)}
+                className="text-blue-500 hover:underline focus:outline-none"
+              >
+                Registrieren
+              </button>
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );

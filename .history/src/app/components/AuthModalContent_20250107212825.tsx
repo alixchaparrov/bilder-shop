@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { FaUser, FaEye, FaEyeSlash } from "react-icons/fa";
-import "react-toastify/dist/ReactToastify.css";
 
 export default function AuthModal({ onClose }: { onClose: () => void }) {
   const { login, register } = useAuth();
@@ -162,6 +161,11 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
     </p>
   )}
 </div>
+
+
+
+
+
       </div>
     </div>
   );

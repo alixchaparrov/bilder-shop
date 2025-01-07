@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { urlFor } from "@/lib/sanity";
 import { useCartStore } from "@/store/cartStore";
-import "react-toastify/dist/ReactToastify.css";
+
 
 export default function ProductCard({ product }) {
   const addToCart = useCartStore((state) => state.addToCart);

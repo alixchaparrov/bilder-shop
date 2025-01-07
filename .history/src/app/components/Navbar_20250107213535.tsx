@@ -7,7 +7,7 @@ import { FaShoppingCart, FaMoon, FaSun } from "react-icons/fa";
 import { useCartStore } from "@/store/cartStore"; // Importa el store del carrito
 import AuthModal from "../components/AuthModalContent";
 import CartModal from "../components/CartModal"; // Asegúrate de que el modal del carrito esté incluido
-import "react-toastify/dist/ReactToastify.css";
+
 
 export default function Navbar({
   searchQuery,

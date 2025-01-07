@@ -3,9 +3,14 @@
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { FaUser, FaEye, FaEyeSlash } from "react-icons/fa";
-import "react-toastify/dist/ReactToastify.css";
 
-export default function AuthModal({ onClose }: { onClose: () => void }) {
+export default function AuthModal({
+  onClose,
+  onPasswordReset,
+}: {
+  onClose: () => void;
+  onPasswordReset: () => void; // Prop para manejar la redirección al formulario de restablecer contraseña
+}) {
   const { login, register } = useAuth();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -135,33 +140,45 @@ export default function AuthModal({ onClose }: { onClose: () => void }) {
           </button>
         </form>
 
-      
-{/* Footer */}
-<div className="flex flex-col items-center mt-4 w-full">
-  {isRegistering ? (
-    <p className="text-sm text-gray-800 text-center w-full">
-      Haben Sie ein Konto?{" "}
-      <button
-        type="button"
-        onClick={() => setIsRegistering(false)}
-        className="text-blue-500 hover:underline focus:outline-none"
-      >
-        Anmelden
-      </button>
-    </p>
-  ) : (
-    <p className="text-sm text-gray-800 text-center w-full">
-      Noch kein Konto?{" "}
-      <button
-        type="button"
-        onClick={() => setIsRegistering(true)}
-        className="text-blue-500 hover:underline focus:outline-none"
-      >
-        Registrieren
-      </button>
-    </p>
-  )}
-</div>
+        {/* Password Reset Link */}
+        {!isRegistering && (
+          <div className="text-center mt-4">
+            <button
+              type="button"
+              onClick={onPasswordReset}
+              className="text-blue-500 hover:underline focus:outline-none"
+            >
+              Passwort vergessen?
+            </button>
+          </div>
+        )}
+
+        {/* Footer */}
+        <div className="flex flex-col items-center mt-4 w-full">
+          {isRegistering ? (
+            <p className="text-sm text-gray-800 text-center w-full">
+              Haben Sie ein Konto?{" "}
+              <button
+                type="button"
+                onClick={() => setIsRegistering(false)}
+                className="text-blue-500 hover:underline focus:outline-none"
+              >
+                Anmelden
+              </button>
+            </p>
+          ) : (
+            <p className="text-sm text-gray-800 text-center w-full">
+              Noch kein Konto?{" "}
+              <button
+                type="button"
+                onClick={() => setIsRegistering(true)}
+                className="text-blue-500 hover:underline focus:outline-none"
+              >
+                Registrieren
+              </button>
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );
